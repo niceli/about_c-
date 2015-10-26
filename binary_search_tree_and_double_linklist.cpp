@@ -40,3 +40,28 @@ public:
     }
    
 };
+//method 2
+class Solution {
+public:
+    TreeNode* head = NULL;
+    TreeNode* pre = NULL;
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        g(pRootOfTree);
+        return head;
+    }
+     void g(TreeNode*r){
+        if(!r) return;
+         g(r->left);
+         if(!head){
+			head = r;
+            head->left = NULL;
+         }else{
+             r->left = pre;
+             pre->right = r;
+         }
+         pre = r;
+         g(r->right);
+        
+    }
+};
