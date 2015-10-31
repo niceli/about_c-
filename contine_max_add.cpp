@@ -41,3 +41,35 @@ public:
         return max;
     }
 };
+//method 2 蛮力穷举
+class Solution {
+public:
+    int FindGreatestSumOfSubArray(vector<int> array) {
+        if(array.size() == 0) return 0;
+    	int max = array[0];
+        int tmp = 0;
+        for(int i=0;i<array.size();i++){
+            for(int j=i;j<array.size();j++){
+                tmp+=array[j];
+                if(tmp>max) max = tmp;
+            }
+            tmp = 0;
+        }
+        return max;
+    }
+};
+//method 3 动态规划：此时的元素要不加入到之前的子数组中，要么是新的子数组的开头
+class Solution {
+public:
+    int FindGreatestSumOfSubArray(vector<int> array) {
+       int current = 0;
+       int max;
+       if(array.size()>0) max = array[0];//防止全负
+       else return 0;
+        for(int i=0;i<array.size();i++){
+            current =array[i]>current+array[i]?array[i]:(current+array[i]);//动态规划
+            if(current>max) max = current;
+        }
+        return max;
+    }
+};
