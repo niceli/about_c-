@@ -89,6 +89,20 @@ void m(Node* root){
         
     }
 }
+void mid(Node* root){
+  if(root == NULL) return;
+  Node p = root;
+  stack<Node*> s;
+  while(p!=NULL||!s.empty()){
+   while(p!=NULL){
+    s.push(p);
+    p = p->left;
+   }
+   cout<< s.top();
+   s.pop();
+   p = p->right;
+  }
+}
 void bshow(Node* root){
     if(root!=NULL){
         bshow(root->l);
