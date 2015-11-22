@@ -22,7 +22,7 @@ public:
             s.pop();
             tmp->right = pre;
             if(!s.empty()){
-				tmp->left = s.top();
+		tmp->left = s.top();
                 pre = tmp;
             }else{
                 tmp->left = NULL;
@@ -32,8 +32,8 @@ public:
         return tmp;
     }
     void mid(TreeNode* r,stack<TreeNode*> &s){
-		if(r){
-			mid(r->left,s);
+	if(r){
+	    mid(r->left,s);
             s.push(r);
             mid(r->right,s);
         }
@@ -54,7 +54,7 @@ public:
         if(!r) return;
          g(r->left);
          if(!head){
-			head = r;
+	    head = r;
             head->left = NULL;
          }else{
              r->left = pre;
@@ -64,4 +64,48 @@ public:
          g(r->right);
         
     }
+};
+//method 3
+class Solution {
+public:
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        if(!pRootOfTree) return NULL;
+        TreeNode* p = pRootOfTree;
+        get(pRootOfTree);
+        while(p->left){
+            p = p->left;
+        }
+        return p;
+    }
+    void get(TreeNode* r){
+        if(!r) return;
+        get(r->left);
+        get(r->right);
+        if(getleft(r)){
+           r->left = getleft(r);
+        	getleft(r)->right = r;
+        }
+        if(getright(r)){
+            r->right = getright(r);
+        	getright(r)->left = r;
+        }
+    }
+    TreeNode* getleft(TreeNode* r){
+        TreeNode *t = r->left;
+        if(!t) return NULL;
+        while(t->right){
+            t = t->right;
+        }
+        return t;
+    }
+    TreeNode* getright(TreeNode* r){
+        TreeNode *t = r->right;
+        if(!t) return NULL;
+        while(t->left){
+            t = t->left;
+        }
+        return t;
+    }
+    
 };
