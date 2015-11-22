@@ -42,3 +42,22 @@ public:
         return v;
     }
 };
+//method 3. 等差公式
+class Solution {
+public:
+    vector<vector<int> > FindContinuousSequence(int sum) {
+        vector<vector<int>> r;
+        double a = 0;
+        for(int i=sum-1;i>=2;i--){
+        	a =(2*sum+i-i*i)/(2*i*1.0);
+            if(a - (int)a==0&&a>0){
+                vector<int> v;
+                for(int j=a;j<a+i;j++){
+                    v.push_back(j);
+                }
+                r.push_back(v);
+            }
+        }
+        return r;
+    }
+};
