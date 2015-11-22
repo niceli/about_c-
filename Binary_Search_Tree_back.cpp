@@ -24,3 +24,22 @@ public:
         return true&&VerifySquenceOfBST(l)&&VerifySquenceOfBST(r);
     }
 };
+//method 2
+class Solution {
+public:
+    bool VerifySquenceOfBST(vector<int> sequence) {
+        if(sequence.size() == 0) return false;
+        return check(sequence,0,sequence.size()-1);
+    }
+    bool check(vector<int> v,int b,int e){
+        if(b >= e) return true;
+        int tmp = v[e];
+        int i=b;
+        for(;i<e&&v[i]<tmp;i++){};
+        int m = i-1;
+        for(;i<e;i++){
+            if(v[i]<=tmp) return false;
+        }
+        return check(v,b,m)&&check(v,m+1,e-1);
+    }
+};
