@@ -19,7 +19,7 @@ public:
             q.push(pRoot);
             int count = 0,size =1;
             while(!q.empty()){
-				TreeNode* tmp = q.front();
+		TreeNode* tmp = q.front();
                 r.push_back(tmp->val);
                 q.pop();
                 if(tmp->left){
@@ -38,6 +38,40 @@ public:
                 }
             }
             return v;
+            
+        }
+    
+};
+//method 2
+class Solution {
+public:
+        vector<vector<int> > Print(TreeNode* pRoot) {
+            queue<TreeNode*> q;
+            vector<vector<int>> m;
+            if(!pRoot) return m;
+            q.push(pRoot);
+            int c=1;
+            int nc = 0;
+            while(!q.empty()){
+                vector<int> v;
+                   nc = 0;
+                while(c--){     
+                    v.push_back(q.front()->val);
+                    if(q.front()->left){
+                        q.push(q.front()->left);
+                        nc++;
+                    }
+                    if(q.front()->right){
+                         q.push(q.front()->right);
+                        nc++;
+                    }
+                    q.pop();
+                }
+                c = nc;
+           	m.push_back(v);     
+            }
+            
+            return m;
             
         }
     
