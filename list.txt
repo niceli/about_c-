@@ -4,4 +4,31 @@
 3 判断矩形和圆相交
 4 精度问题(10-6) 
 	round(a * b * 1e6 / c)/1e6
+5 qs
+qs( vector<int>& v, int a, int b) {
+	int l = a-1, r = b+1, m = v[(a+b)/2];
+	while(l <r) {
+		do l++; while(v[l] < m);
+		do r--; while(v[r] > m);
+		if(l <r) swap(v[l], v[r]);
+	}
+	qs(v, a, r);
+	qs(v, r+1,b);	
+}
+6 ms
+ms( vector<int>& v, vector<int>& tm, int f, int t) {
+	if(f >= t) return;
+	int m = (f + t ) >> 1;
+	ms(v, tm, f, m);
+	ms(v, tm, m+1, t);
+	int k = f, l = f, r = m+1;
+	while(l <= m && r <= t) {
+		if(v[l] < v[r]) tm[k++] = v[l++];
+		else tm[k++] = v[r++];
+	}
+	while(l <=m) tm[k++] = v[l++];
+	while(r<=t) tm[k++] = v[r++];
+	for(int i = f; i<=t; i++) v[i] = tm[i];
+}
+
 
