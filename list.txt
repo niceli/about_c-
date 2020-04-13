@@ -31,4 +31,21 @@ ms( vector<int>& v, vector<int>& tm, int f, int t) {
 	for(int i = f; i<=t; i++) v[i] = tm[i];
 }
 
+7 比较指针
+struct Cm {
+    bool operator() (const Node* a, const Node* b) const {
+        return a->time < b->time;
+    }
+};
+priority_queue<Node*, vector<Node*>, Cm> q;
+
+struct cmp{
+	bool operator()(Node a, Node b){
+		if(a.x == b.x)	return a.y>b.y;
+		return a.x>b.x;
+	}
+};
+priority_quue<Node, vecotr<Node> cmp> q;
+
+8 priority_queue 默认是大顶堆 less<int>  降序排列; greater<int> 升序排列，小顶堆
 
